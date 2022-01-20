@@ -1,0 +1,108 @@
+  .grid-container {
+    margin: 10px;
+  }
+
+  .dashboard-card {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .more-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+  .tbl{
+    width: 97%;
+    margin-left: 22px;
+  }
+  th,td{
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .dashboard-card-content {
+    text-align: center;
+  }
+  .tile-a{
+    background-color: #b2bdbd;
+  }
+  .tile-b{
+    background-color: #b8e6bf;
+  }
+  .tile-c{
+    background-color: #c5d9ed;
+  }
+
+  .tile-d{
+    background-color: #b8e6bf;
+  }
+
+  p{
+    font-size: 12px;
+  }
+
+  button{
+    margin: 5px;;
+  }
+
+  td{
+    font-weight: bold;
+  }
+
+  .card-body {
+    flex: 1 1 auto;
+    /* padding: 1rem 1rem; */
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 30px;
+    /* background-color:darkslategrey; */
+  }
+  .card-text{
+    text-align: left;
+  }
+  .card{
+    height:100%;
+    width: 100%;
+    text-align: left;
+    /* align-items:center; */
+
+  }
+  #task-edit-btn{
+    height: 25px;
+    font-size: 15px;
+    text-align: center;
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-right: 20px;
+  }
+  .card-footer{
+    height:40px;
+    text-align: left;
+    width: 100%;
+    background-color:#758d79;
+  }
+  .card-header{
+    align-content:stretch;
+    font-weight: bold;
+    background-color: #758d79;
+    padding-right: 0px;
+    height:40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 48%;
+  }
+  .main-task{
+    width: 100%;
+  }
+
+  .par-name{
+      padding-left: 0px;
+  }
+  .edit-button{
+    padding-right: 0px;
+  }

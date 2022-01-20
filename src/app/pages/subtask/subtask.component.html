@@ -1,0 +1,192 @@
+<div class="grid-container">
+  <!-- <h1 class="mat-h1">Dashboard</h1> -->
+  <mat-grid-list cols="2" rowHeight="150px">
+    <mat-grid-tile colspan="2" rowspan="1" class="tile-one">
+    <!-- <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows"> -->
+      <mat-card class="dashboard-card">
+        <mat-card-content class="dashboard-card-content">
+          <div>
+            <mat-grid-list cols="2" rowHeight="90px">
+              <mat-grid-tile colspan="1" rowspan="1" class="tile-b">
+                <a class="btn" (click)="loadTask('')">
+                  <span><mat-icon>all_out</mat-icon></span><br>
+                <span>All Subtasks</span>
+              </a>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1" rowspan="1" class="tile-a">
+                <a class="btn" (click)="loadAddTaskComponent()">
+                  <span><mat-icon>note_add</mat-icon></span><br>
+                <span>New Subtask</span>
+              </a>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<div  *ngIf="!inTaskView">
+<app-add-subtask></app-add-subtask>
+</div>
+
+<div class="tbl" *ngIf="inTaskView">
+  <div class="main-task">
+<div  *ngFor="let parTask of parentTaskData; let index=index" class="card text-center border-secondary mb-3">
+  <div class="card text-center">
+    <div class="card-header text-white">
+      <div class="par-name">{{parTask.task_Name.toUpperCase(0)}}</div>
+      <!-- <span class="hdr-edit-btn"> -->
+        <div class="edit-button"><button id="task-edit-btn" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="bottom" title="Edit" (click)="setEditValues(parTask, index)"> Edit Task</button></div>
+      <!-- </span> -->
+    </div>
+    <div class="row">
+      <!-- <div class="col-sm-6">
+        <div class="card "> -->
+          <div class="card-body text-black">
+            <p class="card-text" >Status : <span [ngStyle]="{'color': parTask.status_Color}">{{parTask.status_Name}}</span></p>
+            <p class="card-text" >Priority : <span [ngStyle]="{'color': parTask.priority_Color}">{{parTask.priority_Name}}</span></p>
+            <p class="card-text" >Category : <span>{{parTask.category_Name}}</span></p>
+            <p class="card-text" >Description : <span>{{parTask.description}}</span></p>
+            <!-- <a href="" class="btn btn-primary">Edit Task</a> -->
+          </div>
+        <!-- </div>
+      </div> -->
+      <!-- <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="task-edit-btn">
+            <button class="btn btn-primary" (click)="setEditValues(parTask, index)">Edit Task</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <!-- <div class="card-footer text-muted">
+        <button id="task-edit-btn" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="bottom" title="Edit" (click)="setEditValues(parTask, index)"> Edit Task</button>
+    </div> -->
+  </div>
+</div>
+</div>
+
+<div class="subtask-table">
+  <table class="table">
+     <thead class="thead-light">
+       <tr>
+         <th scope="col">Subtask Name</th>
+         <th scope="col">Status</th>
+         <th scope="col">Category</th>
+         <th scope="col">Priority</th>
+         <th scope="col">Actions</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let subtask of taskList; let index=index">
+         <td> {{subtask.task_Name}} <br><p> {{subtask.description}} </p></td>
+         <td>
+          <span *ngIf="!editSubTaskIndex[index]; else editStatus" [ngStyle]="{'color': subtask.status_Color}" (click)="editSubTaskIndex[index]=true">{{subtask.status_Name}}</span>
+          <ng-template #editStatus>
+            <select id="ssd" class="form-control" [(ngModel)]="subtask.status_Id" name="status" *ngIf="editSubTaskIndex[index]">
+            <option *ngFor="let status of statusData" required [value]="status.statusId">{{status.statusName}}</option>
+            </select>
+          </ng-template>
+        </td>
+
+         <td>
+          <span *ngIf="!editSubTaskIndex[index]; else editCategory" (click)="editSubTaskIndex[index]=true">{{subtask.category_Name}}</span>
+          <ng-template #editCategory>
+           <select id="ssd" class="form-control" [(ngModel)]="subtask.category_Id" name='category' *ngIf="editSubTaskIndex[index]">
+          <option *ngFor="let category of catData" required [value]="category.categoryId">{{category.categoryName}}</option>
+          </select>
+          </ng-template>
+        </td>
+         <td>
+          <span *ngIf="!editSubTaskIndex[index]; else editPriority" [ngStyle]="{'color': subtask.priority_Color}" (click)="editSubTaskIndex[index]=true">{{subtask.priority_Name}}</span>
+          <ng-template #editPriority>
+           <select id="ssd" class="form-control" [(ngModel)]="subtask.priority_Id" name='priority' *ngIf="editSubTaskIndex[index]">
+          <option *ngFor="let priority of priorityList" required [value]="priority.priorityId" >{{priority.priorityName}}</option>
+          </select>
+        </ng-template>
+        </td>
+        <td>
+          <button *ngIf="!editSubTaskIndex[index];" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Edit" (click)="setEditValues(subtask, index);"><mat-icon>edit</mat-icon></button>
+          <button *ngIf="editSubTaskIndex[index];" class="btn btn-outline-success" data-toggle="tooltip" data-placement="bottom" title="Save" (click)="saveChanges(subtask, index)"><mat-icon>save</mat-icon></button>
+          <button *ngIf="editSubTaskIndex[index];" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Cancel" (click)="editSubTaskIndex[index]=false"><mat-icon>cancel</mat-icon></button>
+          <button *ngIf="!editSubTaskIndex[index];" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" (click)="setDeleteValues(subtask.task_Id, subtask.task_Name, index)"><mat-icon>delete</mat-icon></button>
+        </td>
+        </tr>
+     </tbody>
+   </table>
+  </div>
+ </div>
+
+ <div class="modal" tabindex="-1" id="deleteModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete {{taskName}} ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="deleteTask()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- editModal -->
+<div class="modal fade cd-example-modal-lg" id="editSubTaskModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+       <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="align-content: center; font-size:x-large; padding-left: 5%;">Edit Task - {{editSubTask .task_Name}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Sprint</label>
+                  <select id="ssd" class="form-control" [(ngModel)]="editSubTask.sprint_Id" name='id'>
+                    <option *ngFor="let sprint of sprintData" [value]="sprint.sprintId">{{sprint.sprintName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Status</label>
+                  <select id="ssd" class="form-control" [(ngModel)]="editSubTask .status_Id" name="status">
+                    <option *ngFor="let status of statusData" required [value]="status.statusId">{{status.statusName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Category</label>
+                  <select id="ssd" class="form-control" [(ngModel)]="editSubTask .category_Id" name='category'>
+                    <option *ngFor="let category of catData" required [value]="category.categoryId">{{category.categoryName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Priority</label>
+                  <select id="ssd" class="form-control" [(ngModel)]="editSubTask.priority_Id" name='priority'>
+                    <option *ngFor="let priority of priorityList" required [value]="priority.priorityId" >{{priority.priorityName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Description</label>
+                  <input type="text" class="form-control" [(ngModel)]="editSubTask.description" name='description' id="description">
+                </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveChanges(editSubTask)">Save changes</button>
+    </div>
+  </form>
+</div>
+  </div>
+</div>
+</div>

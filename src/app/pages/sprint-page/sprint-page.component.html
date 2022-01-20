@@ -1,0 +1,93 @@
+<div class="grid-container">
+  <mat-grid-list cols="2" rowHeight="150px">
+    <mat-grid-tile colspan="2" rowspan="1" class="tile-one">
+      <mat-card class="dashboard-card">
+
+        <mat-card-content class="dashboard-card-content">
+          <div>
+            <mat-grid-list cols="4" rowHeight="90px">
+
+              <mat-grid-tile colspan="1" rowspan="1" class="tile-b">
+                <a class="btn" (click)="loadAllSprintComponent()">
+                  <mat-icon>all_out</mat-icon>
+                <span>All Sprints</span>
+              </a>
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="1" rowspan="1" class="tile-c">
+                <a class="btn" (click)="loadUpcommingSprintComponent()">
+                  <mat-icon>query_builder</mat-icon>
+                <span>Upcomming Sprint</span>
+              </a>
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="1" rowspan="1" class="tile-d">
+                <a class="btn" (click)="loadCompletedSprintComponent()">
+                  <mat-icon>verified_user</mat-icon>
+                <span>Completed Sprint</span>
+              </a>
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="1" rowspan="1" class="tile-a">
+                <a class="btn" (click)="loadAddSprintComponent()">
+                  <mat-icon>note_add</mat-icon>
+                <span>New Sprint</span>
+              </a>
+              </mat-grid-tile>
+
+            </mat-grid-list>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<div class="tbl" *ngIf="inTaskView">
+  <table class="table">
+     <thead class="thead-light">
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Sprint Name</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Actions</th>
+            <!-- <th scope="col">Delete Sprint</th> -->
+        </tr>
+        </thead>
+    <tbody>
+         <tr *ngFor="let sprint of sprintData; let index=index">
+            <td></td>
+            <td>{{sprint.sprint_Name}}</td>
+            <td>{{sprint.start_Date}}</td>
+            <td>{{sprint.end_Date}}</td>
+            <td><button class="btn btn-outline-success" data-toggle="tooltip" data-placement="bottom" title="View Tasks" (click)="onSelectSprints(sprint.sprint_Id)"><mat-icon>remove_red_eye</mat-icon></button>
+              <button class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" (click)="setDeleteValues(sprint.sprint_Id, sprint.sprint_Name, index)"><mat-icon>delete</mat-icon></button></td>
+            <!-- <td> <button type="button" class="btn btn-outline-info" (click)="onSelectSprints(sprint.sprint_Id)"> View </button></td> -->
+            <!-- <td> <button type="button" class="btn btn-outline-danger" (click)="setDeleteValues(sprint.sprint_Id, sprint.sprint_Name, index)"> Delete </button></td> -->
+        </tr>
+     </tbody>
+    </table>
+</div>
+<div *ngIf="!inTaskView">
+<app-add-sprint></app-add-sprint>
+</div>
+
+<div class="modal" tabindex="-1" id="deleteModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Sprint</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete  {{sprintName}} ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="deleteSprint()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+
+    <div class="user-img">
+      <img src="./../../assets/images/user.png" >
+      <div class="user-name"><p class="userName">{{this.userName.toUpperCase()}}</p>
+      </div>
+    </div>
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item style="font-weight: bold;" routerLink="main-task" class="task" (click)="paramsService.$sprintContent.next(true); paramsService.$sprintField.next(true)">Task</a>
+
+      <a mat-list-item style="font-weight: bold;" routerLink="sprint" class="sprint" (click)="loadSelectSprint = false; paramsService.$sprintField.next(false)">Sprint</a>
+
+      <!-- <a mat-list-item style="font-weight: bold;" routerLink="subtask" class="subtask" (click)="paramsService.$sprintContent.next(false); paramsService.$sprintField.next(false) ">Subtask</a> -->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="dashboard">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">Menu
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+
+      <div><img src="./../../assets/images/cinchlogo.png" height="45px" width="45px"></div>
+        <div class="comp-name">CINCH Business Solutions</div>
+        <div class="sprintList" *ngIf="sprintField">
+          <select class="form-select" [(ngModel)]="sprintId" (ngModelChange)="onSelectSprints($event)" aria-label="Default select example" data-toggle="tooltip" data-placement="bottom" title="Select Sprint">
+            <option *ngFor="let sprint of sprintData"  [ngValue]="sprint.sprintId" name="sprint">{{sprint.sprintName}}<br></option>
+          </select>
+        </div>
+        <div *ngIf="backField" class="back-btn">
+          <button (click)="goBack()" class="logoutButton" data-toggle="tooltip" data-placement="bottom" title="Back"><div class="back"><mat-icon>arrow_back</mat-icon></div></button>
+        </div>
+        <div class="logout-sec">
+        <button (click)="goLogout()" class="logoutButton" data-toggle="tooltip" data-placement="bottom" title="Logout"><div class="logout"><mat-icon>exit_to_app</mat-icon></div></button>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- logout modal -->
+
+<div class="modal" tabindex="-1" id="logoutModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Logout</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to <strong>Logout</strong> ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)="confirmLogout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

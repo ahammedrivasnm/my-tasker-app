@@ -1,0 +1,21 @@
+<div class="tbl">
+  <table class="table">
+     <thead class="thead-light">
+    <tr>
+      <!-- <th scope="col">Sprint ID</th> -->
+      <th scope="col">Sprint NAme</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sprint of sprintData">
+      <!-- <td>{{sprint.sprintId}}</td> -->
+      <td>{{sprint.sprintName}}</td>
+      <td>{{sprint.startDate}}</td>
+      <td>{{sprint.endDate}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

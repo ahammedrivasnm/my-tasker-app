@@ -1,0 +1,69 @@
+<div class="grid-container-two">
+  <mat-grid-list cols="2" >
+    <mat-grid-tile colspan="1" rowspan="1" class="tile-two">
+      <mat-card class="dashboard-card">
+
+        <mat-card-content class="dashboard-card-content">
+          <br>
+            <h1>Add New Subtask</h1>
+            <br>
+          <div class="add-content">
+            <mat-form-field appearance="fill">
+              <mat-label>Subtask Name
+              </mat-label>
+              <input matInput required [(ngModel)]="taskName">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+              <mat-label>Description
+              </mat-label>
+              <input matInput [(ngModel)]="description">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Priority</mat-label>
+                <mat-select [(ngModel)]="priorityId" required>
+                  <mat-option *ngFor="let cat of priority" [value]="cat.priorityId">
+                    {{cat.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Created By</mat-label>
+                <mat-select [(ngModel)]="userName" required>
+                  <mat-option *ngFor="let user of userNames" required  [value]="user">
+                    {{user}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+              <mat-label>Sprint</mat-label>
+              <mat-select [(ngModel)]="sprintId" required>
+                <mat-option *ngFor="let sprint of sprintData" required  [value]="sprint.sprintId">
+                  {{sprint.sprintName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+              <mat-label>Category</mat-label>
+              <mat-select [(ngModel)]="categoryId" required>
+                <mat-option *ngFor="let category of catData" required [value]="category.categoryId">
+                  {{category.categoryName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="add" class="add-task" (click)="onSubmit()">Add Subtask</mat-button-toggle>
+          </mat-button-toggle-group>
+
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -1,0 +1,109 @@
+.grid-container {
+    margin: 10px;
+  }
+
+  .dashboard-card {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .more-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+
+  .dashboard-card-content {
+    text-align: center;
+  }
+  .tile-a{
+    background-color: #b2bdbd;
+  }
+  .tile-b{
+    background-color: #facfd2;
+  }
+  .tile-c{
+    background-color: #c5d9ed;
+  }
+  .tile-d{
+    background-color: #b8e6bf;
+  }
+  .grid-container-two {
+    margin: 10px;
+  }
+  .material-icons.md-48 {
+    font-size: 48px;
+  }
+  .select-sprint{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: none;
+  }
+  .form-select{
+    margin:10px 10px 10px 10px;
+    margin-left: 25px;
+    width:25%;
+    background-color: #e0ebe2;
+  }
+  .tbl{
+    width: 97%;
+    margin-left: 22px;
+  }
+  th,td{
+    text-align: center;
+    vertical-align: middle;
+  }
+  p{
+    font-size: 14px;
+    font-family: Lato;
+  }
+  td{
+    font-weight: bold;
+  }
+
+
+  /* ////////////////////////////////// */
+
+  .dashboard-card {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .more-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+
+  .dashboard-card-content {
+    text-align: center;
+  }
+  .add-task{
+  background-color:darkcyan;
+  }
+  .mat-form-field{
+  border-radius: 4px 4px 0 0;
+  padding: .75em .75em 0 .75em;
+  width: 300px;
+  }
+
+  .p{font-size:xx-small;}
+
+  label{font-size: 20px;}
+  select{background-color: ghostwhite;}
+  input{background-color: ghostwhite;}
+
+  .modal-header{
+    background-color: whitesmoke;
+  }
+  button{
+    margin: 5px;;
+    }
+

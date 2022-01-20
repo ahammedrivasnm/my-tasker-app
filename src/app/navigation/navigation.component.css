@@ -1,0 +1,82 @@
+.sidenav-container {
+    height: 100%;
+
+}
+
+.sidenav {
+    width: 200px;
+    background-color: #758d79;
+}
+
+.sidenav .mat-toolbar {
+    background: inherit;
+}
+
+.mat-toolbar.mat-primary
+{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.dashboard
+{
+    background-color:steelblue ;
+}
+
+.select-nav{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.sprintList
+{
+  margin-left: 1000px;
+  margin-right: 0px;
+}
+
+.form-select
+{
+    margin:10px 100px 10px 10px;
+    margin-left: 0px;
+    width:100%;
+    background-color: #e0ebe2;
+}
+.logout
+{
+    margin:10px 10px 10px 10px;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.back
+{
+    margin:10px 10px 10px 10px;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.comp-name{
+    margin-left: 20px;
+}
+
+.logoutButton{
+    background-color:transparent;
+    border-color: transparent;
+}
+
+.logout-sec{
+    margin-right: 0px;
+}
+.back-btn{
+    margin-left: auto;
+    margin-right: 10px;
+}
+.userName{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 15px;
+}
